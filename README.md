@@ -448,11 +448,21 @@ This fork adds **CyberMythos**, a safety-scoped extension for Linux-focused secu
 ### Quick Start
 
 ```shell
+# Classify command risk
 python examples/cyber_mythos_cli.py classify "nmap -sV 10.10.10.5"
-python examples/cyber_mythos_cli.py classify --authorized "nmap -sV 10.10.10.5"
+
+# Create a CTF workflow
 python examples/cyber_mythos_cli.py ctf --name "web warmup" --category web
+
+# Print a Linux hardening checklist
 python examples/cyber_mythos_cli.py hardening
-python examples/cyber_mythos_cli.py model-info
+
+# Access OffSec-inspired AI skills
+python examples/cyber_mythos_cli.py offsec recon --target "example.com"
+python examples/cyber_mythos_cli.py offsec exploit --vuln "buffer overflow"
+python examples/cyber_mythos_cli.py offsec privesc --output "linpeas output"
+python examples/cyber_mythos_cli.py offsec web --type "SQL injection" --context "search page"
+python examples/cyber_mythos_cli.py offsec ad --data "bloodhound data"
 ```
 
 ### Python Usage
@@ -477,3 +487,6 @@ print(model.parameter_count)
 | `training/cyber_finetune_blueprint.py` | Seed JSONL generator for safe supervised fine-tuning examples. |
 | `docs/cyber_mythos_design.md` | Architecture and safety design document. |
 | `tests/test_cyber.py` | Unit tests for CyberMythos safety and helper behavior. |
+| `open_mythos/cyber/offsec_skills/` | OffSec-inspired AI skill modules (recon, exploit, privesc, web, ad). |
+| `tests/test_offsec_skills.py` | Unit tests for the new OffSec AI skill modules. |
+| `docs/offsec_ai_skills_design.md` | Design document for OffSec-inspired AI skill modules. |

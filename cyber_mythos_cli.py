@@ -50,6 +50,26 @@ def build_parser() -> argparse.ArgumentParser:
 
     sub.add_parser("hardening", help="Print a Linux hardening checklist")
     sub.add_parser("model-info", help="Instantiate the tiny CyberMythos model and print parameter count")
+
+    offsec = sub.add_parser("offsec", help="Access OffSec-inspired AI skills")
+    offsec_sub = offsec.add_subparsers(dest="skill", required=True)
+
+    recon_skill = offsec_sub.add_parser("recon", help="AI-assisted reconnaissance")
+    recon_skill.add_argument("--target", required=True, help="Target information")
+
+    exploit_skill = offsec_sub.add_parser("exploit", help="AI-driven exploitation analysis")
+    exploit_skill.add_argument("--vuln", required=True, help="Vulnerability details")
+
+    privesc_skill = offsec_sub.add_parser("privesc", help="AI-guided privilege escalation")
+    privesc_skill.add_argument("--output", required=True, help="Enumeration tool output")
+
+    web_skill = offsec_sub.add_parser("web", help="AI-assisted web attack analysis")
+    web_skill.add_argument("--type", required=True, help="Vulnerability type")
+    web_skill.add_argument("--context", required=True, help="Application context")
+
+    ad_skill = offsec_sub.add_parser("ad", help="AI-assisted AD enumeration")
+    ad_skill.add_argument("--data", required=True, help="AD enumeration data")
+
     return parser
 
 
@@ -95,6 +115,20 @@ def main() -> None:
         model = CyberMythos()
         print(f"CyberMythos tiny parameters: {model.parameter_count:,}")
         print(f"Max loops: {model.cfg.max_loop_iters}; context: {model.cfg.max_seq_len}")
+        return
+
+    if args.command == "offsec":
+        model = CyberMythos()
+        if args.skill == "recon":
+            print(model.recon.suggest_recon_strategy(args.target))
+        elif args.skill == "exploit":
+            print(model.exploit.analyze_vulnerability(args.vuln))
+        elif args.skill == "privesc":
+            print(model.privesc.analyze_enumeration_output(args.output))
+        elif args.skill == "web":
+            print(model.web.analyze_web_vulnerability(args.type, args.context))
+        elif args.skill == "ad":
+            print(model.ad.analyze_ad_data(args.data))
         return
 
 
